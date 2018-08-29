@@ -7,6 +7,7 @@ package stringprocessing;
 
 import java.io.File;
 import java.util.Scanner;
+import static javafx.scene.input.KeyCode.Z;
 
 /**
  *
@@ -29,35 +30,29 @@ public class StringProcessing {
             int currIndex = 0;
             while(input.hasNext()) {
                 String [] line = input.nextLine().split(",");
-                
-                if (!line[0].isEmpty() && !line[1].isEmpty()) {
-                    char [] firstnameToArray = new char[line[0].length()];
-                    char [] lastnameToArray = new char[line[1].length()];
-                    
-                    int nonAlphaCount1 = 0;
-                   
-                    for (int i = 0; i < firstnameToArray.length; i++) {
-                        if (firstnameToArray[i].)
-                    }
-                    
+                String firstname = "";
+                String lastname = "";
+                if (nameIsValid(line[0]) == true && nameIsValid(line[1]) == true) {
+                    firstname = line[0];
+                    lastname = line[1];
                 }
-                String firstname = line[0];
+                String gender = "";
+                if (genderIsValid(line[2]) == true) {
+                    gender = line[2]; 
+                }
+                String age = "";
                 
-                String lastname = line[1];
-                String gender = line[2]; 
-                String age = line[3];
-                String phoneNumber = line[4];
-                String email = line[5];
+                if (ageIsValid(line[3]) == true) {
+                    age = line[3];
+                }
                 
+                String phoneNumber = "";
+                if (phoneNumberIsValid(line[4]) == true) {
+                    phoneNumber = line[4];
+                }
                 
-                
-                firstname.trim();
-                lastname.trim();
-                gender.trim();
-                age.trim();
-                phoneNumber.trim();
-                email.trim();
-                
+                String email = "";
+          
                 csvArray[currIndex] = String.format("%-15s %-20s %-8s %-3s %-12s %-40s", firstname, lastname, gender, age, phoneNumber, email);
                 System.out.println(csvArray[currIndex]);
                 currIndex++;
@@ -72,5 +67,45 @@ public class StringProcessing {
         
         
     }
-    
+    private static boolean nameIsValid(String name) {
+        if (name.trim().matches("[a-zA-Z]+\\.?")) {
+           return true; 
+        } else {
+            System.err.print("Name is invalid");
+            return false;
+        }
+    }
+    private static boolean genderIsValid(String gender) {
+        if ((gender.trim().equalsIgnoreCase("male")) || (gender.trim().equalsIgnoreCase("female"))) {
+            return true;
+        } else {
+            System.err.print("gender is invalid");
+            return false;
+            
+        }
+    }
+    private static boolean ageIsValid(String age) {
+        if (age.trim().matches("[1-130]+\\.?")) {
+            return true;
+        } else {
+            System.err.print("age is invalid");
+            return false;
+        }
+    }
+    private static boolean phoneNumberIsValid(String phoneNumber) {
+        if ((phoneNumber.trim().length() - 3) == 10) {
+           return true; 
+        } else {
+            System.err.print("Phone number is invalid");
+            return false;
+        }
+    }
+   /* private static boolean emailIsValid(String email) {
+        char [] 
+        if ((email.charAt(0).matches["[a-zA-Z]\\.?"]) && email.contains("@") && (email.contains(".com") || email.contains(".net")) ) {
+            return true;
+        } else {
+            System.out
+        }
+    } */
 }
